@@ -9,7 +9,6 @@ networks:
 # Define the services/containers to be run
 services:
   front: # name of the first service
-    env_file: .front.env
     image: mikelm20/factor-front-end
     container_name: factor-front-end
     ports:
@@ -30,9 +29,13 @@ services:
       - backend
     depends_on:
       - database
-    environment:
-      WAIT_HOSTS: database:27017
-    command: ["npm", "start"]
+    entrypoint:
+      - /bin/sh
+      - ./wait-for.sh
+      - database:27017
+      - --
+      - npm
+      - start
 
   database: # name of the third service
     env_file: .db.env
