@@ -13,11 +13,8 @@ RUN npm install
 
 #add rest of the project
 COPY ./src/ /factor/src
-#COPY ./.env /factor
+COPY ./wait-for.sh /factor/wait-for.sh
 
 #outside port
 EXPOSE 3000
 
-## THE LIFE SAVER
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
-RUN chmod +x /wait
