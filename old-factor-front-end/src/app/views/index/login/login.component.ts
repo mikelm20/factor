@@ -21,15 +21,27 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]], //pattern('')
-      password: ['', [Validators.required, Validators.minLength(5)]]
-    });
+      this.loginForm = this.formBuilder;
   }
 
   get f() { return this.loginForm.controls; }
 
-  verifyUser() {
+
+
+
+  gotoLogin() {
+    
+    this.submitted = true;
+    this._httpService.getOauth().subscribe((url:string)=> {
+        console.log("URL:",url);
+        window.location.replace(url);
+    }, (error: any) => {console.log(error);});
+          
+  }
+
+  /*    OLD PASSWORD PHISHING
+  
+    verifyUser() {
       this.submitted = true;
 
       // stop the process here if form is invalid
@@ -59,10 +71,6 @@ export class LoginComponent implements OnInit {
               console.log('review pass show alert');
           }
       }, (error: any) => {console.log(error);});
-  }
-
-  // ToDo DELETE _____ Ask the API to change the password
-  forgotPasswordForm() {
-  }
+  } */
 
 }

@@ -20,11 +20,6 @@ export class HttpService {
     return uri;
   }
 
-  /*** login ***/
-  login(email,pass): Observable<User> {
-    return this.http.post<User>(ModelsComponent.api + ModelsComponent.version + 'auth', {email, pass})
-  }
-
   // Get oauth url from the API
   getOauth(): Observable<any> {
     return this.http.get<any>(ModelsComponent.api + ModelsComponent.version + 'auth');

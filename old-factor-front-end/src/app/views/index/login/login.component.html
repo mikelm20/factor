@@ -1,0 +1,20 @@
+<div class="row back maxmargin" [ngStyle]="{ 'background-image': 'url(./assets/campus-night-1500.jpg)' }">
+	<div class="col-lg-4 col-md-4 col-sm-12"></div>
+	<div class="col-lg-4 col-md-4 col-sm-12">
+		<div class="login">
+			<img class="iit-logo" alt="Illinois Institute of Technology Logo" src="./assets/IIT_Logo_stack_186_blk.svg">
+			<form [formGroup]="loginForm" (ngSubmit)="gotoLogin()"></form>
+          		<div class="row">
+					<button type="submit" class="btn btn-primary mr-auto" style="margin-left: 15px;" i18n>Login</button>
+				</div>
+			</form>
+		</div>
+  	</div>
+  	<div class="col-lg-4 col-md-4 col-sm-12"></div>
+	<div class="bottomright">
+		<ng-template ngFor let-lang [ngForOf]="languages">
+			<span *ngIf="lang.code !== localeId"><a href="/{{lang.code}}/"><img alt="up" src="./assets/{{lang.img}}.svg" width="15" height="15"></a> </span>
+			<span *ngIf="lang.code === localeId"><img style="filter: grayscale(100%);" alt="up" src="./assets/{{lang.img}}.svg" width="15" height="15"> </span>
+		</ng-template>
+	</div>
+</div>
