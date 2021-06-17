@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "@types/gapi.auth2": "^0.0.54"
-  }
-}
