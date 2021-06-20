@@ -27,7 +27,7 @@ export class UploadComponent {
               const formData = new FormData();
               formData.append("video", file);
 
-              const upload$ = this.http.post("127.0.0.1:3000/api/videos", formData, {
+              const upload$ = this.http.post("http://127.0.0.1:3000/api/videos", formData, {
                   reportProgress: true,
                   observe: 'events'
               })
