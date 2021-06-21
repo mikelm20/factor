@@ -47,4 +47,6 @@ router.get('/video/:id', (req, res) => {
     }
 });
 
+router.get('/video/:id/caption', (req, res) => res.sendFile(path.resolve(__dirname, `../assets/captions/${req.params.id}.vtt`)));
+
 module.exports = router;
