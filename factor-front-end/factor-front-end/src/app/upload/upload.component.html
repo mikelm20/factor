@@ -1,5 +1,5 @@
 
-<input requiredFileType="video/mp4" type="file" class="file-input" [accept]="requiredFileType" (change)="onFileSelected($event)" #fileUpload>
+<input requiredFileType="video/mp4" type="file" class="file-input" [accept]="requiredFileType" hidden (change)="onNewFile($event)" #fileUpload>
 
 <div class="file-upload">
 
@@ -11,6 +11,8 @@
     </button>
 
 </div>
+
+<div><button (click)="onFileUpload()">Upload</button></div>
 
 <div class="progress">
 

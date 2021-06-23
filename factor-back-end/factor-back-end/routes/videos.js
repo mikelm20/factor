@@ -3,6 +3,7 @@ const router = express.Router();
 const videos = require('../fake-db');
 const fs = require('fs');
 const path = require('path');
+const formidable = require("formidable");
 
 // get list of videos
 router.get('/', (req,res)=>{
@@ -48,5 +49,29 @@ router.get('/video/:id', (req, res) => {
 });
 
 router.get('/video/:id/caption', (req, res) => res.sendFile(path.resolve(__dirname, `../assets/captions/${req.params.id}.vtt`)));
+
+
+router.post('/upload', (req, res) => {
+    
+    //Set database directory
+    let form = formidable({
+        uploadDir: "assets"
+    });
+
+    //Parse Request Body And Save Files By Random Name In "uploadDir"
+    form.parse(req,(error, fields, files) => {
+        
+        //Rename Files After Saving them
+        //files.file.path = Random formidable name
+        //files.file.name = formData key value pair: original file name
+        let newFilePath = `../assets/${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
+        fs.renameSync(path.join(path.resolve(__dirname,`../`), files.file.path), path.join(__dirname, newFilePath));
+        
+        //End Response
+        res.json("newFilePath");
+    });
+
+});
+
 
 module.exports = router;

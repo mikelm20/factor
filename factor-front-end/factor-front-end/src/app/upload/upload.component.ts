@@ -12,36 +12,40 @@ export class UploadComponent {
 
   @Input()
       requiredFileType: string | undefined;
-
+      formData: FormData | undefined;
       fileName = '';
       uploadProgress: number | undefined;
       uploadSub: Subscription = new Subscription;
 
       constructor(private http: HttpClient) {}
 
-      onFileSelected(event:any) {
-          const file:File = event.target.files[0];
+      onNewFile(event:any){
+        const file:File = event.target.files[0];
         
           if (file) {
               this.fileName = file.name;
-              const formData = new FormData();
-              formData.append("video", file);
-
-              const upload$ = this.http.post("http://127.0.0.1:3000/api/videos", formData, {
-                  reportProgress: true,
-                  observe: 'events'
-              })
-              .pipe(
-                  finalize(() => this.reset())
-              );
-            
-              this.uploadSub = upload$.subscribe(event => {
-                if (event.type == HttpEventType.UploadProgress) {
-                  const total: number = event.total!;  
-                  this.uploadProgress = Math.round(100 * (event.loaded / total));
-                }
-              })
+              this.formData = new FormData();
+              this.formData.append("file", file);
+              this.formData.append( "name", this.fileName);
           }
+      }
+      
+        onFileUpload() {
+        
+        const upload$ = this.http.post("http://127.0.0.1:5000/videos/upload", this.formData, {
+            reportProgress: true,
+            observe: 'events'
+        })
+        .pipe(
+            finalize(() => this.reset())
+        );
+      
+        this.uploadSub = upload$.subscribe(event => {
+          if (event.type == HttpEventType.UploadProgress) {
+            const total: number = event.total!;  
+            this.uploadProgress = Math.round(100 * (event.loaded / total));
+          }
+        })
       }
 
     cancelUpload() {
