@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const formidable = require("formidable");
-const videos = require('../fake-db');
+const {VideoModel: Video} = require('../models');
 
 const saveVideo = async (req, res, next) => {
   try {
@@ -13,14 +13,26 @@ const saveVideo = async (req, res, next) => {
     //Parse Request Body And Save Files By Random Name In "uploadDir"
     form.parse(req,(error, fields, files) => {
         
-        //Rename Files After Saving them
-        //files.file.path = Random formidable name
-        //files.file.name = formData key value pair: original file name
-        let newFilePath = `../assets/${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
-        fs.renameSync(path.join(path.resolve(__dirname,`../`), files.file.path), path.join(__dirname, newFilePath));
-        
-        //End Response
-        return res.json("newFilePath");
+      //Rename Files After Saving them
+      //files.file.path = Random formidable name
+      //files.file.name = formData key value pair: original file name
+      let newFilePath = `../assets/${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
+      fs.renameSync(path.join(path.resolve(__dirname,`../`), files.file.path), path.join(__dirname, newFilePath));
+
+      // Create a doc with the video info
+      const newVideo = new Video({
+        email: "martin@gmail.com", //The owner of the video
+        name: files.file.name, //The name of the video
+        filePath: newFilePath, //The path to the video
+        transcriptPath: [{ API: "AWS", textPath: path.resolve(__dirname, `../assets/captions/${files.file.name}.vtt`)}], // The name and path to each transcript.
+
+      });
+
+      // Save the new video info in the database
+      newVideo.save();
+
+      //End Response
+      return res.json("newFilePath");
     });
   } catch (error) {
     return next(error);
@@ -66,12 +78,13 @@ const sendVideo = async (req, res, next) => {
 
 // Returns the database video list specified in the "videos" const
 const getVideoList = async (req, res, next) => {
-  return res.json(videos)
+  const doc = await Video.find();
+  return res.json(doc);
 }
 
 // Returns the captions for the specified video
 const getCaption = async (req, res, next) => {
-  return res.sendFile(path.resolve(__dirname, `../assets/captions/${req.params.id}.vtt`))
+  return res.sendFile(path.resolve(__dirname, `../assets/captions/${req.params.id}.vtt`));
 }
 
 // Returns the info for the specified video
