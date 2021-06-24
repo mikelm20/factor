@@ -1,77 +1,30 @@
 const express = require('express');
+
+// Load video API controllers
+const { videoController: controller } = require('../controllers');
+
+/*
+
+API: HOST:PORT/videos/*
+
+*/
+
 const router = express.Router();
-const videos = require('../fake-db');
-const fs = require('fs');
-const path = require('path');
-const formidable = require("formidable");
 
-// get list of videos
-router.get('/', (req,res)=>{
-    res.json(videos)
-})
+// Request list of videos
+router.get('/', controller.getVideoList);
 
+// Request for info on a particular video
+router.get('/:id', controller.getVideoInfo);
 
-// make request for a particular video
-router.get('/:id', (req,res)=> {
-    const id = parseInt(req.params.id, 10)
-    res.json(videos[id])
-})
+// Request for a particular video
+router.get('/video/:id', controller.sendVideo);
 
-router.get('/video/:id', (req, res) => {
-    const videoPath = path.resolve(__dirname, `../assets/${req.params.id}.mp4`);
-    const videoStat = fs.statSync(videoPath);
-    const fileSize = videoStat.size;
-    const videoRange = req.headers.range;
-    if (videoRange) {
-        const parts = videoRange.replace(/bytes=/, "").split("-");
-        const start = parseInt(parts[0], 10);
-        const end = parts[1]
-            ? parseInt(parts[1], 10)
-            : fileSize-1;
-        const chunksize = (end-start) + 1;
-        const file = fs.createReadStream(videoPath, {start, end});
-        const head = {
-            'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-            'Accept-Ranges': 'bytes',
-            'Content-Length': chunksize,
-            'Content-Type': 'video/mp4',
-        };
-        res.writeHead(206, head);
-        file.pipe(res);
-    } else {
-        const head = {
-            'Content-Length': fileSize,
-            'Content-Type': 'video/mp4',
-        };
-        res.writeHead(200, head);
-        fs.createReadStream(videoPath).pipe(res);
-    }
-});
+// Request for captions of a particular video
+router.get('/video/:id/caption', controller.getCaption);
 
-router.get('/video/:id/caption', (req, res) => res.sendFile(path.resolve(__dirname, `../assets/captions/${req.params.id}.vtt`)));
-
-
-router.post('/upload', (req, res) => {
-    
-    //Set database directory
-    let form = formidable({
-        uploadDir: "assets"
-    });
-
-    //Parse Request Body And Save Files By Random Name In "uploadDir"
-    form.parse(req,(error, fields, files) => {
-        
-        //Rename Files After Saving them
-        //files.file.path = Random formidable name
-        //files.file.name = formData key value pair: original file name
-        let newFilePath = `../assets/${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
-        fs.renameSync(path.join(path.resolve(__dirname,`../`), files.file.path), path.join(__dirname, newFilePath));
-        
-        //End Response
-        res.json("newFilePath");
-    });
-
-});
+// Save uploaded videos
+router.post('/upload', controller.saveVideo);
 
 
 module.exports = router;
