@@ -1,11 +1,8 @@
 const express = require('express');
-const fs = require('fs');
-const cors = require('cors');
-const path = require('path');
 const routes = require('./routes/index');
 const app = express();
 
-app.use(function (req, res, next) {
+app.use((req, res, next) =>{
 
     // Website you wish to allow to connect (Factor front-end)
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
