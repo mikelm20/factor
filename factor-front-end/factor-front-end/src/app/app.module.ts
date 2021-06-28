@@ -8,14 +8,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VideoComponent } from './video/video.component';
 import { MatIconModule } from '@angular/material/icon'; 
  import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component'; 
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PlayComponent } from './play/play.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadComponent,
     VideoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PlayComponent
   ],
   imports: [
     BrowserModule,
