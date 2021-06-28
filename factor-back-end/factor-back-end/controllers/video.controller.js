@@ -16,13 +16,14 @@ const saveVideo = async (req, res, next) => {
       //Rename Files After Saving them
       //files.file.path = Random formidable name
       //files.file.name = formData key value pair: original file name
-      let newFilePath = `../assets/${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
+      let newName = `${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
+      let newFilePath = `../assets/${newName}`;
       fs.renameSync(path.join(path.resolve(__dirname,`../`), files.file.path), path.join(__dirname, newFilePath));
 
       // Create a doc with the video info
       const newVideo = new Video({
         email: "martin@gmail.com", //The owner of the video
-        name: files.file.name, //The name of the video
+        name: newName, //The name of the video
         filePath: newFilePath, //The path to the video
         transcriptPath: [{ API: "AWS", textPath: path.resolve(__dirname, `../assets/captions/${files.file.name}.vtt`)}], // The name and path to each transcript.
 
@@ -40,9 +41,9 @@ const saveVideo = async (req, res, next) => {
 };
 
 // Returns the specified video in the request id
-const sendVideo = async (req, res, next) => {
+const getVideo = async (req, res, next) => {
   try {
-    const videoPath = path.resolve(__dirname, `../assets/${req.params.id}.mp4`);
+    const videoPath = path.resolve(__dirname, `../assets/${req.params.id}`);
     const videoStat = fs.statSync(videoPath);
     const fileSize = videoStat.size;
     const videoRange = req.headers.range;
@@ -84,7 +85,9 @@ const getVideoList = async (req, res, next) => {
 
 // Returns the captions for the specified video
 const getCaption = async (req, res, next) => {
-  return res.sendFile(path.resolve(__dirname, `../assets/captions/${req.params.id}.vtt`));
+  const video = req.params.id;
+  const caption = video.replace(".mp4",".vtt")
+  return res.sendFile(path.resolve(__dirname, `../assets/captions/${caption}`));
 }
 
 // Returns the info for the specified video
@@ -95,7 +98,7 @@ const getVideoInfo = async (req, res, next) => {
 
 module.exports = {
   saveVideo,
-  sendVideo,
+  getVideo,
   getVideoList,
   getCaption,
   getVideoInfo
