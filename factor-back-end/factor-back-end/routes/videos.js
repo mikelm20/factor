@@ -18,7 +18,7 @@ router.get('/', controller.getVideoList);
 router.get('/:id', controller.getVideoInfo);
 
 // Request for a particular video
-router.get('/video/:id', controller.sendVideo);
+router.get('/video/:id', controller.getVideo);
 
 // Request for captions of a particular video
 router.get('/video/:id/caption', controller.getCaption);

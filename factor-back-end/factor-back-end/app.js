@@ -2,7 +2,7 @@ const express = require('express');
 const routes = require('./routes/index');
 const app = express();
 
-app.use((req, res, next) =>{
+app.use(function(req, res, next){
 
     // Website you wish to allow to connect (Factor front-end)
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
