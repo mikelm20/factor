@@ -83,13 +83,6 @@ const getVideoList = async (req, res, next) => {
   return res.json(doc);
 }
 
-// Returns the captions for the specified video
-const getCaption = async (req, res, next) => {
-  const video = req.params.id;
-  const caption = video.replace(".mp4",".vtt")
-  return res.sendFile(path.resolve(__dirname, `../assets/captions/${caption}`));
-}
-
 // Returns the info for the specified video
 const getVideoInfo = async (req, res, next) => {
   const id = parseInt(req.params.id, 10)
@@ -100,6 +93,5 @@ module.exports = {
   saveVideo,
   getVideo,
   getVideoList,
-  getCaption,
   getVideoInfo
 };
