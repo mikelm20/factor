@@ -10,7 +10,7 @@ export class VideoComponent implements OnInit {
 
   i:number;
   li:any;
-  lis=[];
+  text:any;
   
 constructor(private http : HttpClient){
   this.i=0;
@@ -21,7 +21,6 @@ constructor(private http : HttpClient){
     .subscribe(Response => {
       console.log(Response);
       this.li=Response;
-      this.lis=this.li.list;
     });
   }
 
@@ -29,5 +28,14 @@ constructor(private http : HttpClient){
  onPress(index: number) {
    this.display = !this.display;
    this.i=index;
+ }
+
+ transcribe(index: number) {
+   this.i=index;
+   this.http.get("http://127.0.0.1:5000/transcripts/transcribe/"+this.li[this.i].name+"/AWS")
+    .subscribe(Response => {
+      console.log(Response);
+      this.text=Response;
+    });
  }
 }

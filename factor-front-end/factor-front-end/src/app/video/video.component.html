@@ -3,6 +3,7 @@
     <nav>
         <div *ngFor="let item of li; let x = index">
             <button (click)="onPress(x)">{{item.name}}</button>
+            <button (click)="transcribe(x)">AWS</button>
         </div>
         <div *ngIf="display">
             <app-play [list]="li" [i]="i"></app-play>
