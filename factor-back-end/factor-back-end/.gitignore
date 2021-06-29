@@ -9,5 +9,5 @@ node_modules/
 assets/
 
 #DeepSpeech
-.pbmm
-.scorer
+*.pbmm
+*.scorer

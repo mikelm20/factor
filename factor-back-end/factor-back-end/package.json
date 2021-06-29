@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "deepspeech": "^0.9.3",
     "express": "^4.17.1",
     "formidable": "^1.2.2",
     "mongoose": "^5.12.14",
