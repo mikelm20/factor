@@ -6,7 +6,7 @@ COPY ./package*.json .
 
 RUN npm install
 
-RUN apt update && apt install -y python3-pip
+RUN apt update && apt install -y python3-pip ffmpeg
 
 RUN pip3 install deepspeech
 
@@ -15,4 +15,4 @@ COPY ./src/ .
 
 #VOLUME ./assets /factor/assets
 
-EXPOSE 4200
+EXPOSE 5000
