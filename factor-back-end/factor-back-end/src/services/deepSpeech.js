@@ -5,6 +5,8 @@ const MemoryStream = require('memory-stream');
 const Duplex = require('stream').Duplex;
 const Wav = require('node-wav');
 
+const deepSpeech = async file =>{
+
 let modelPath = '../models/deepspeech-0.9.3-models.pbmm';
 
 let model = new DeepSpeech.Model(modelPath);
@@ -15,7 +17,7 @@ let scorerPath = '../models/deepspeech-0.9.3-models.scorer';
 
 model.enableExternalScorer(scorerPath);
 
-let audioFile = process.argv[2] || './audio/2830-3980-0043.wav';
+let audioFile = file;
 
 if (!Fs.existsSync(audioFile)) {
 	console.log('file missing:', audioFile);
@@ -64,3 +66,9 @@ audioStream.on('finish', () => {
 	
 	console.log('result:', result);
 });
+
+}
+
+module.exports = {
+  deepSpeech
+};
