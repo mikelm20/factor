@@ -1,16 +1,18 @@
-FROM nikolaik/python-nodejs:python3.9-nodejs16
+FROM node:16.3
 
-WORKDIR /usr/src/app
+WORKDIR /factor
 
-COPY ./src/package*.json ./
+COPY ./package*.json .
 
 RUN npm install
+
+RUN apt update && apt install -y python3-pip
 
 RUN pip3 install deepspeech
 
 #add rest of the project
 COPY ./src/ .
 
-VOLUME ./assets/audio .
+#VOLUME ./assets /factor/assets
 
 EXPOSE 4200
