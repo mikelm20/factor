@@ -3,11 +3,14 @@ const path = require('path');
 const formidable = require("formidable");
 const {VideoModel: Video} = require('../models');
 
+const dirV = '/factor/assets/videos/';
+const dirT = '/factor/assets/transcripts/';
+
 const saveVideo = async (req, res, next) => {
   try {
     //Set database directory
     let form = formidable({
-        uploadDir: "assets"
+        uploadDir: dirV
     });
 
     //Parse Request Body And Save Files By Random Name In "uploadDir"
@@ -17,15 +20,15 @@ const saveVideo = async (req, res, next) => {
       //files.file.path = Random formidable name
       //files.file.name = formData key value pair: original file name
       let newName = `${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
-      let newFilePath = `../assets/${newName}`;
-      fs.renameSync(path.join(path.resolve(__dirname,`../`), files.file.path), path.join(__dirname, newFilePath));
+      let newFilePath = dirV+newName;
+      fs.renameSync(files.file.path, newFilePath);
 
       // Create a doc with the video info
       const newVideo = new Video({
         email: "martin@gmail.com", //The owner of the video
         name: newName, //The name of the video
         filePath: newFilePath, //The path to the video
-        transcriptPath: [{ API: "AWS", textPath: path.resolve(__dirname, `../assets/captions/${files.file.name}.vtt`)}], // The name and path to each transcript.
+        transcriptPath: [{ API: "DS", textPath: dirT+newName}], // The name and path to each transcript.
 
       });
 
@@ -43,7 +46,7 @@ const saveVideo = async (req, res, next) => {
 // Returns the specified video in the request id
 const getVideo = async (req, res, next) => {
   try {
-    const videoPath = path.resolve(__dirname, `../assets/${req.params.id}`);
+    const videoPath = dirV+req.params.id;
     const videoStat = fs.statSync(videoPath);
     const fileSize = videoStat.size;
     const videoRange = req.headers.range;

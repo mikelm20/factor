@@ -6,7 +6,7 @@ COPY ./package*.json .
 
 RUN npm install
 
-RUN apt update && apt install -y python3-pip ffmpeg
+RUN apt update && apt install -y python3-pip ffmpeg sox
 
 RUN pip3 install deepspeech
 

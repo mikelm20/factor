@@ -30,9 +30,18 @@ constructor(private http : HttpClient){
    this.i=index;
  }
 
- transcribe(index: number) {
+ transcribeAWS(index: number) {
    this.i=index;
-   this.http.get("http://127.0.0.1:5000/transcripts/transcribe/"+this.li[this.i].name+"/AWS")
+   this.http.get("http://127.0.0.1:5000/transcripts/transcribe/AWS/"+this.li[this.i].name)
+    .subscribe(Response => {
+      console.log(Response);
+      this.text=Response;
+    });
+ }
+
+ transcribeDS(index: number) {
+   this.i=index;
+   this.http.get("http://127.0.0.1:5000/transcripts/transcribe/DS/"+this.li[this.i].name)
     .subscribe(Response => {
       console.log(Response);
       this.text=Response;
