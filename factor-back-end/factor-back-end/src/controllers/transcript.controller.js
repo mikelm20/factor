@@ -1,8 +1,9 @@
 const path = require('path');
 const ds = require("../services/ds.service");
 
-const dirT = '/factor/assets/transcripts/';
-const dirV = '/factor/assets/videos/'
+const assets = process.env.WORKDIR+process.env.ASSETS;
+const dirT = `${assets}/transcripts/`;
+const dirV = `${assets}/videos/`;
 
 // Returns the captions for the specified video
 const getTranscript = async (req, res, next) => {

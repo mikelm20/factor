@@ -3,8 +3,9 @@ const path = require('path');
 const formidable = require("formidable");
 const {VideoModel: Video} = require('../models');
 
-const dirV = '/factor/assets/videos/';
-const dirT = '/factor/assets/transcripts/';
+const assets = process.env.WORKDIR+process.env.ASSETS;
+const dirT = `${assets}/transcripts/`;
+const dirV = `${assets}/videos/`;
 
 const saveVideo = async (req, res, next) => {
   try {

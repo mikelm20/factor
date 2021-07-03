@@ -2,10 +2,10 @@ const { exec } = require("child_process");
 const extractAudio = require('ffmpeg-extract-audio');
 var sox = require('sox');
 
-const dirV = '/factor/assets/videos/';
-const dirA = '/factor/assets/audios/';
-const dirT = '/factor/assets/transcripts/';
-const dirM = '/factor/assets/';
+const assets = process.env.WORKDIR+process.env.ASSETS;
+const dirT = `${assets}/transcripts/`;
+const dirV = `${assets}/videos/`;
+const dirA = `${assets}/audios/`;
 
 const executeDeepSpeech = async (videoFile)=>{
 
@@ -50,7 +50,7 @@ const executeDeepSpeech = async (videoFile)=>{
 
         console.log("Transcribing text from: ",outputWav2);
 
-        exec(`deepspeech --model ${dirM}deepspeech-0.9.3-models.pbmm --scorer ${dirM}deepspeech-0.9.3-models.scorer --audio ${outputWav2} > ${outputTxt}`, (error, stdout, stderr) => {
+        exec(`deepspeech --model ${assets}deepspeech-0.9.3-models.pbmm --scorer ${assets}deepspeech-0.9.3-models.scorer --audio ${outputWav2} > ${outputTxt}`, (error, stdout, stderr) => {
         
         if (error) {
             console.log(`error: ${error.message}`);
