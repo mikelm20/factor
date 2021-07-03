@@ -26,6 +26,7 @@ services:
       - --
       - node
       - app.js
+    restart: always
 
   database: # name of the third service
     env_file: .db.env
@@ -37,6 +38,7 @@ services:
     networks:
       - backend
       - db
+    restart: always
 
   dbUI:
     env_file: .db-ui.env
@@ -48,3 +50,4 @@ services:
       - db # link this service to the database service
     depends_on:
       - database
+    restart: always
