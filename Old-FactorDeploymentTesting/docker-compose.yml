@@ -2,20 +2,30 @@ version: "3.9"
 
 # Define the networks
 networks:
+  frontend:
   backend:
   db:
 
 # Define the services/containers to be run
 services:
+  front: # name of the first service
+    image: mikelm20/factor-front-end
+    container_name: factor-front-end
+    ports:
+      - "80:80" # specify port forwarding
+    networks:
+      - frontend
+
   back: #name of the second service
     env_file: .back.env
     image: mikelm20/factor-back-end
     container_name: factor-back-end
     volumes:
-      - "../factor-back-end/factor-back-end/assets:/factor/assets"
+      - "./assets:/assets"
     ports:
-      - "5000:5000" #specify port forwarding
+      - "3000:3000" #specify port forwarding
     networks:
+      - frontend
       - backend
     depends_on:
       - database
@@ -24,8 +34,8 @@ services:
       - ./wait-for.sh
       - database:27017
       - --
-      - node
-      - app.js
+      - npm
+      - start
 
   database: # name of the third service
     env_file: .db.env
@@ -34,6 +44,8 @@ services:
     volumes:
       - "./database/:/data/db"
       - "./factor-db-init/:/docker-entrypoint-initdb.d/"
+    ports:
+      - "27018:27017" # specify port forwarding
     networks:
       - backend
       - db
