@@ -29,8 +29,6 @@ const saveVideo = async (req, res, next) => {
         email: "martin@gmail.com", //The owner of the video
         name: newName, //The name of the video
         filePath: newFilePath, //The path to the video
-        transcriptPath: [{ API: "DS", textPath: dirT+newName}], // The name and path to each transcript.
-
       });
 
       // Save the new video info in the database

@@ -18,7 +18,7 @@ const awsTranscribe = async (req, res, next) => {
   console.log("Calling AWS and storing transcripts for:" + videoId);
   // Code for AWS
   aws.uploadFileToS3(dirV+videoId,process.env.S3_AUDIO_BUCKET);
-
+  aws.transcribeS3Video(videoId,process.env.S3_AUDIO_BUCKET);
   return res.writeHead(200, {'Content-Type': 'text/plain'})
 }
 
