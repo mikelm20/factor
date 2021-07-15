@@ -1,27 +1,26 @@
-import logo from '../sources/logo.svg';
-import '../styles/App.css';
 import React from "react";
+import Header from "./Header"
+import '../styles/App.css';
+import Routes from './Routes';
+import { BrowserRouter as Router} from 'react-router-dom';
+import Footer from "../components/Footer";
 
 function App() {
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //Upload video
-
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Welcome to Factor, please upload a video to use the platform:</p>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <button type="submit">Upload video</button>
-          </form>
+      <div className="App">
+        <div className="App-header">
+          <Header/>
         </div>
-      </header>
-    </div>
+        <Router>
+        <div className="App-body">
+          <Routes/>
+        </div>
+        <div className="App-footer">
+          <Footer/>
+        </div>
+      </Router>
+      </div>
   );
 }
 

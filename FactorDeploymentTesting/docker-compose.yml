@@ -40,13 +40,13 @@ services:
       - db
     restart: always
 
-  # dbUI:
-  #   env_file: .db-ui.env
-  #   image: mongo-express
-  #   container_name: db-ui
-  #   ports:
-  #     - 8082:8081
-  #   networks:
-  #     - db # link this service to the database service
-  #   depends_on:
-  #     - database
+  dbUI:
+    env_file: .db-ui.env
+    image: mongo-express
+    container_name: db-ui
+    ports:
+      - 8082:8081
+    networks:
+      - db # link this service to the database service
+    depends_on:
+      - database

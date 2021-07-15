@@ -5,8 +5,10 @@ const { Schema } = mongoose;
 // Create Schema
 const videoSchema = new Schema({
     
-    email: String, //The owner of the video
-    name: String, //The name of the video
+    owner: String, //The name of the professor
+    email: String, //The email of the uploader
+    title: String, //The title of the video
+    fileName: String, //The original file name
     filePath: String, //The path to the video
     transcriptPath: [{ API: String, textPath: String}], // The name and path to each transcript.
     date: { type: Date, default: Date.now } // Date created (automatic)

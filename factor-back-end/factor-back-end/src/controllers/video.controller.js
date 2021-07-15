@@ -20,14 +20,16 @@ const saveVideo = async (req, res, next) => {
       //Rename Files After Saving them
       //files.file.path = Random formidable name
       //files.file.name = formData key value pair: original file name
-      let newName = `${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
+      let newName = `${files.file.name.replace(new RegExp(' ','g'),'-').replace('.mp4','')}_${Date.now()}.mp4`;
       let newFilePath = dirV+newName;
       fs.renameSync(files.file.path, newFilePath);
 
       // Create a doc with the video info
       const newVideo = new Video({
-        email: "martin@gmail.com", //The owner of the video
-        name: newName, //The name of the video
+        owner: fields.owner, //The owner of the video
+        email: fields.email,  //The email of the owner
+        title: fields.title, //The title of the video
+        fileName: newName, //The name of the video
         filePath: newFilePath, //The path to the video
       });
 
@@ -35,7 +37,7 @@ const saveVideo = async (req, res, next) => {
       newVideo.save();
 
       //End Response
-      return res.json("newFilePath");
+      return res.json(`${fields.owner}, ${fields.title} has been uploaded successfully!`);
     });
   } catch (error) {
     return next(error);
