@@ -55,7 +55,7 @@ const gcTranscribe = async (videoFile) => {
     
     console.log(`Transcription: ${transcription}`);
 
-    fs.writeFile(outputTxt, transcription, function(err) {
+    fs.writeFile(outputTxt, JSON.stringify(response.results), function(err) {
         if (err) {
             console.log(err);
         }

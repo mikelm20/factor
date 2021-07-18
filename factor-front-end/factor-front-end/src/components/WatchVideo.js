@@ -1,4 +1,5 @@
 import React from "react";
+const api = process.env.REACT_APP_BACKEND;
 
   const WatchVideo = ({name}) => {
 
@@ -15,20 +16,20 @@ import React from "react";
     const [azText, setAzText] = React.useState("");
 
       React.useEffect(() => {
-          const apiUrl = `http://localhost:5000/transcripts/transcript/ds/${fileName}`;
+          const apiUrl = `${api}/transcripts/transcript/ds/${fileName}`;
           fetch(apiUrl)
           .then((res) => res.text())
           .then((transcript) => {
             try{
               setDSText(transcript);
             } catch(err) {
-              setDSText("No transcripts yet");
+              setDSText(transcript);
             }
           });
       },[ds, fileName]);
 
       React.useEffect(() => {
-          const apiUrl = `http://localhost:5000/transcripts/transcript/ibm/${fileName}`;
+          const apiUrl = `${api}/transcripts/transcript/ibm/${fileName}`;
           fetch(apiUrl)
           .then((res) => res.text())
           .then((obj) => {
@@ -48,7 +49,7 @@ import React from "react";
       },[ibm, fileName]);
 
       React.useEffect(() => {
-          const apiUrl = `http://localhost:5000/transcripts/transcript/aws/${fileName}`;
+          const apiUrl = `${api}/transcripts/transcript/aws/${fileName}`;
           fetch(apiUrl)
           .then((res) => res.text())
           .then((obj) => {
@@ -64,12 +65,14 @@ import React from "react";
       },[aws, fileName]);
 
        React.useEffect(() => {
-          const apiUrl = `http://localhost:5000/transcripts/transcript/gc/${fileName}`;
+          const apiUrl = `${api}/transcripts/transcript/gc/${fileName}`;
           fetch(apiUrl)
           .then((res) => res.text())
           .then((obj) => {
             try {
-              setGcText(obj);
+              const transcription = JSON.parse(obj)
+        .map(result => result.alternatives[0].transcript)
+              setGcText(transcription);
             } catch(err) {
               setGcText("No transcripts yet");
               console.log(err);
@@ -78,7 +81,7 @@ import React from "react";
       },[gc, fileName]);
 
        React.useEffect(() => {
-          const apiUrl = `http://localhost:5000/transcripts/transcript/az/${fileName}`;
+          const apiUrl = `${api}/transcripts/transcript/az/${fileName}`;
           fetch(apiUrl)
           .then((res) => res.text())
           .then((obj) => {
@@ -95,7 +98,7 @@ import React from "react";
         setIBM(!ibm);
       }
       
-      const showDS = ()=>{
+      const showDs = ()=>{
         setDS(!ds);
       }
 
@@ -120,32 +123,25 @@ import React from "react";
               src={"http://localhost:5000/transcripts/transcript/"+fileName} /> */}
             </video>
           </div>
-            
-            <button id="trancribers" onClick={showAWS}>AWS</button>
-            <button id="trancribers" onClick={showIbm}>IBM</button>
-            <button id="trancribers" onClick={showGc}>Google</button>
-            <button id="trancribers" onClick={showAz}>Azure</button>
-            <button id="trancribers" onClick={showDS}>DeepSpeech</button>
 
-          <div id="videoTranscript">
-            <p>AWS</p>
-            {aws ? awsText : null}
+          <div id="videoTranscript" onClick={showAWS}>
+            {aws ? awsText : "AWS Transcribe"}
           </div>
-          <div id="videoTranscript">
-            <p>IBM</p>
-            {ibm ? ibmText : null}
+          
+          <div id="videoTranscript" onClick={showIbm}>
+            {ibm ? ibmText : "IBM Watson" }
           </div>
-          <div id="videoTranscript">
-            <p>Google</p>
-            {gc ? gcText : null}
+          
+          <div id="videoTranscript" onClick={showGc}>
+            {gc ? gcText : "Google Cloud"}
           </div>
-          <div id="videoTranscript">
-            <p>Azure</p>
-            {az ? azText : null}
+          
+          <div id="videoTranscript" onClick={showAz}>
+            {az ? azText : "Azure Cognitive"}
           </div>
-          <div id="videoTranscript">
-            <p>DeepSpeech</p>
-            {ds ? dsText : null}
+          
+          <div id="videoTranscript" onClick={showDs}>
+            {ds ? dsText : "DeepSpeech"}
           </div>
         </div>
 

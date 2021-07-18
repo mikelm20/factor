@@ -1,18 +1,15 @@
 import React from "react";
 import FileUpload from "../components/FileUpload";
-import NotLogged from "../components/NoLog";
+import NotLogged from "../components/NotLogged";
 
-function Upload() {
-  
-  const auth = window.localStorage.getItem('auth');
+function Upload(props) {
 
-  if(auth){
+  if(props.auth){
     return (
       <div className="App-upload">
-          <h3>Please upload a video to use the platform</h3>
+          <h2>Please upload a video to use the platform</h2>
           <FileUpload/>
       </div>
-      
     );
   }
   else

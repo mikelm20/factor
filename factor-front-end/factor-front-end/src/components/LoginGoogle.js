@@ -5,19 +5,20 @@ import { refreshTokenSetup } from '../utils/refreshToken';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-function LoginGoogle() {
+function LoginGoogle(props) {
 
   let history = useHistory();
 
   const onSuccess = (res) => {
+    props.login(true);
     window.localStorage.setItem('owner',res.profileObj.name);
     window.localStorage.setItem('email',res.profileObj.email);
-    window.localStorage.setItem('auth',true);
     history.push('/home');
     refreshTokenSetup(res);
   };
 
   const onFailure = (res) => {
+    props.login(false);
     console.log('Login failed: res:', res);
     history.push('/unauthorized');
   };

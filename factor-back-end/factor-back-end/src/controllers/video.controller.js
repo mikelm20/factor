@@ -17,11 +17,11 @@ const saveVideo = async (req, res, next) => {
     //Parse Request Body And Save Files By Random Name In "uploadDir"
     form.parse(req,(error, fields, files) => {
         
-      //Rename Files After Saving them
-      //files.file.path = Random formidable name
-      //files.file.name = formData key value pair: original file name
+      //Create a new name filename-date.mp4
       let newName = `${files.file.name.replace(new RegExp(' ','g'),'-').replace('.mp4','')}_${Date.now()}.mp4`;
       let newFilePath = dirV+newName;
+      
+      //Save file
       fs.renameSync(files.file.path, newFilePath);
 
       // Create a doc with the video info
@@ -36,11 +36,11 @@ const saveVideo = async (req, res, next) => {
       // Save the new video info in the database
       newVideo.save();
 
-      //End Response
+      //End Response for upload alert
       return res.json(`${fields.owner}, ${fields.title} has been uploaded successfully!`);
     });
   } catch (error) {
-    return next(error);
+    return res.json("Upload failed, please correct the file and try again");
   }
 };
 

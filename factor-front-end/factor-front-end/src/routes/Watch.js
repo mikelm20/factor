@@ -1,8 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import WatchVideo from "../components/WatchVideo";
+import NotLogged from "../components/NotLogged";
 
-  const Watch = () => {
+  const Watch = (props) => {
 
     const { id } = useParams();
 
@@ -61,18 +62,21 @@ import WatchVideo from "../components/WatchVideo";
       }
     }
 
+    if(props.auth){
       return (
         <div>
-          <button id="trancribers" onClick={aws}>AWS</button>
-          <button id="trancribers" onClick={ibm}>IBM</button>
-          <button id="trancribers" onClick={gc}>Google</button>
-          <button id="trancribers" onClick={az}>Azure</button>
-          <button id="trancribers" onClick={ds}>DeepSpeech</button>
+          <button className="transcriptShow" id="awsShow" onClick={aws}></button>
+          <button className="transcriptShow" id="ibmShow" onClick={ibm}></button>
+          <button className="transcriptShow" id="gcShow" onClick={gc}></button>
+          <button className="transcriptShow" id="azShow" onClick={az}></button>
+          <button className="transcriptShow" id="dsShow" onClick={ds}></button>
           <div id="videoFrame">
             <WatchVideo name={id}/>
           </div>
         </div>
       );
+    }
+    else return <NotLogged/>
   }
 
 

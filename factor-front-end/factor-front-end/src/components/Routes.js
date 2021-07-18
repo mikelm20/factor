@@ -7,16 +7,16 @@ import Unauthorized from'../routes/Unauthorized';
 import React from 'react';
 import Watch from '../routes/Watch';
 
-const Routes = () => {
+const Routes = (props) => {
 
   return (
     <Switch>
-      <Route exact path='/login' component={Login}/>
-      <Route exact path='/watch/:id' component={Watch}/>
-      <Route exact path='/upload' component={Upload}/>
-      <Route exact path='/view' component={View}/>
-      <Route exact path='/home' component={Home}/>
-      <Route path='/' component={Unauthorized}/>
+      <Route exact path='/login' render={()=><Login login={props.login}/>}/>
+      <Route exact path='/watch/:id' render={()=><Watch auth={props.auth}/>}/>
+      <Route exact path='/upload' render={()=><Upload auth={props.auth}/>}/>
+      <Route exact path='/view' render={()=><View auth={props.auth}/>}/>
+      <Route exact path='/home' render={()=><Home auth={props.auth}/>}/>
+      <Route path='/' render={()=><Unauthorized auth={props.auth}/>}/>
     </Switch>
   )
 }

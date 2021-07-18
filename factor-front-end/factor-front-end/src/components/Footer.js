@@ -2,19 +2,17 @@ import AuthFooter from "./AuthFooter";
 import NoAuthFooter from "./NoAuthFooter";
 import { useState, useEffect } from 'react';
 
-const Footer = () =>{
-
-    const auth = window.localStorage.getItem("auth");
+const Footer = (props) =>{
 
     const [isAuth, setAuth] = useState(false);
 
     useEffect(() => {
-        setAuth(auth);
-    }, [auth]);
+        setAuth(props.auth);
+    }, [props.auth]);
     
     return(
         <div>
-            {isAuth ? <AuthFooter/> : <NoAuthFooter/>}
+            {isAuth ? <AuthFooter login={props.login}/> : <NoAuthFooter/>}
         </div>
     )
 }

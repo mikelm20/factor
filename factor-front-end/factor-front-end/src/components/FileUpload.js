@@ -15,18 +15,17 @@ const FileUpload = () => {
      
   // On file upload (click the upload button) 
   const onFileUpload = () => { 
+    
     // Create an object of formData 
-  
-    console.log(owner);
     const formData = new FormData(); 
       
-    // Update the formData object 
+    // Update the formData object with the File and the API parameters
     formData.append( "file", file);
     formData.append( "email", email);
     formData.append( "owner", owner);
     formData.append( "title", title);
 
-    axios.post('http://localhost:5000/videos/upload', formData)
+    axios.post(`${process.env.REACT_APP_BACKEND}/videos/upload`, formData)
     .then(function (response) {
       alert(response.data);
     })
@@ -40,15 +39,17 @@ const FileUpload = () => {
   }
 
   return (
-    <div className="App-fileUpload">
-        <div>
-            <label for="fname">Video name: </label>
-            <input id= "fname"type="text" value={title} onChange={onTextChange}/>
-          <div>
-            <input type="file" onChange={onFileChange} /> 
-            <button onClick={onFileUpload}> Upload </button> 
-            </div> 
-        </div>
+    <div id="App-fileUpload">
+      <div id="App-fileNaming">
+          <label for="fname">Tittle: </label>
+          <input id= "fname" type="text" value={title} onChange={onTextChange}/>
+      </div> 
+      
+      <div className="upload-button" onClick={onFileUpload}> Upload</div> 
+        
+      <div id="App-fileSelector">
+        <input type="file" onChange={onFileChange} accept=".mp4"/> 
+      </div> 
     </div>
   );
 }

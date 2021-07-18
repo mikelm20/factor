@@ -1,13 +1,12 @@
 import React from "react";
 import Videos from "../components/Videos";
-import NotLogged from "../components/NoLog";
+import NotLogged from "../components/NotLogged";
 
-function View() {
+function View(props) {
 
-  const auth = window.localStorage.getItem('auth');
   const owner = window.localStorage.getItem('owner');
 
-  if(auth){
+  if(props.auth){
     return (
         <div className="App-videos">
            <h2>Videos for: {owner}</h2>

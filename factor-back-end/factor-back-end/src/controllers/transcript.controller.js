@@ -10,6 +10,8 @@ const gc = require("../services/gc.service");
 //Azure
 const az = require("../services/az.service");
 
+const fs = require('fs');
+
 const bucket = process.env.AWS_S3_AUDIO_BUCKET;
 const assets = process.env.WORKDIR+process.env.ASSETS;
 const dirT = `${assets}/transcripts/`;
@@ -23,7 +25,17 @@ const getTranscript = async (req, res, next) => {
   if(api == "aws"){
     aws.saveFileFromS3(dirT+api+"/"+ text, videoId.replace(".mp4","")+"-transcription.json", bucket);
   }
-  return res.sendFile(dirT+api+"/"+ text);
+  //Check if file exists, if not, send default message
+  try {
+    if (fs.existsSync(dirT+api+"/"+ text)) {
+      //file exists so send it
+      return res.sendFile(dirT+api+"/"+ text);
+    }
+  } catch(err) {
+    console.log(err);
+      return res.json('No transcripts yet.');
+  }
+  
 }
 
 const awsTranscribe = async (req, res, next) => {

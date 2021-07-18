@@ -1,6 +1,10 @@
 .App {
   text-align: center;
-  background-color: #00a7f5;
+  min-height: 90vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 8%; /* height of your footer */
 }
 
 .App-logo {
@@ -14,12 +18,13 @@
 }
 
 .App-header {
+  display: flex;
   min-height: 8%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 2vmin;
-  color: rgba(0, 0, 0, 0.726);
+  color: #ffffff;
 }
 
 .App-body {
@@ -27,11 +32,12 @@
 }
 
 .App-footer {
-  position: fixed;
   bottom: 0;
   height: 8%;
   left: 0;
   width: 100%;
+  background-color: #1eceb6;
+  position: absolute;
 }
 
 .link {
@@ -43,73 +49,116 @@
 }
 
 #videoWrapper {
-  background-color: rgb(88, 154, 216);
+  background-color: rgba(0, 0, 0, 0.788);
   border-width: 2px;
   border-style: solid;
-  border-color: black;
+  border-color: rgb(255, 255, 255);
   text-align: left;
   margin: 1%;
   padding: 1%;
+  color: white;
 }
 
 #videoFrame {
   padding: 1%;
 }
 
-#trancribers {
-  background-color: rgb(199, 48, 81);
+#button {
   color: white;
-  font-weight: bolder;
-  width: 10em;
-  height: 3em;
+  padding: 1em 4em;
+  border: 0.2em solid rgb(255, 255, 255);
+  margin: 0 2em 2em 0;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: rgba(0, 0, 0, 0.452);
+  font-weight: 1000;
+  font-size: 100%;
 }
 
-#trancribers:hover {
-  background-color: rgb(223, 158, 158);
-  color: white;
-  width: 10em;
-  height: 3em;
-  cursor: pointer;
+.transcriptShow {
+  background-size: cover;
+  margin: 0 1em 0 1em;
+  background-color: white;
+}
+
+#awsShow {
+  background-image: url(../sources/aws.png);
+  width: 200px;
+  height: 80px;
+}
+
+#ibmShow {
+  background-image: url(../sources/ibm.png);
+  width: 200px;
+  height: 80px;
+}
+
+#azShow {
+  background-image: url(../sources/azure.png);
+  width: 200px;
+  height: 80px;
+}
+
+#gcShow {
+  background-image: url(../sources/GoogleCloud.png);
+  width: 200px;
+  height: 80px;
+}
+
+#dsShow {
+  background-image: url(../sources/deepspeech.png);
+  width: 220px;
+  height: 80px;
 }
 
 #videoTranscript {
+  cursor: pointer;
+  background-color: #ffffff;
   padding: 1%;
-  border-radius: 1%;
   border-style: solid;
   margin: 1%;
   text-align: justify;
 }
 
-#button {
-  width: 20%;
-  padding: 1%;
-  border-style: groove;
-  border-color: black;
-  background-color: white;
+.clearfix {
+  clear: both;
 }
 
 #button-home {
   padding: 1%;
-  border-style: groove;
+  border-style: solid;
   border-color: black;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   height: 2%;
   width: 10%;
-  position: sticky;
-  top: 0em;
+  float: left; /* add this */
+}
+
+.upload-button {
+  padding: 1%;
+  border-style: solid;
+  border-color: black;
+  background-color: rgb(255, 255, 255);
+  width: 40%;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-left: 30%;
 }
 
 #user {
   color: white;
   height: 100%;
   width: 60%;
-  float: left; /* add this */
+  float: left;
 }
 #logout {
   margin-top: 0.5%;
   height: 100%;
   width: 20%;
-  float: left; /* add this */
+  float: left;
 }
 
 #wrapper {
@@ -119,6 +168,41 @@
   overflow: hidden;
 }
 
+#App-fileUpload {
+  border-style: solid;
+  border-color: turquoise;
+  padding: 10% 2.5% 10% 2.5%;
+  margin: 10% 0 10% 0;
+  background-color: rgba(0, 0, 0, 0.411);
+  align-content: center;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 4px 4px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 1em;
+  font-weight: bolder;
+}
+
+input[type="file"] {
+  width: 50%;
+  padding: 4px 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+  font-weight: bolder;
+  color: white;
+  width: 100%;
+  cursor: pointer;
+  margin-left: 30%;
+}
+
+#App-fileNaming {
+  font-size: 2em;
+  color: white;
+}
+
 video {
   height: 40%;
   width: 50%;
@@ -126,6 +210,11 @@ video {
 
 a {
   padding: 0.5%;
-  color: #000000;
+  color: #2bffca;
   text-decoration: none;
+}
+
+h3,
+h2 {
+  color: white;
 }

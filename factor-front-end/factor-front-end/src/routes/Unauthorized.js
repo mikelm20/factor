@@ -1,16 +1,14 @@
 import React from 'react';
-import NotLogged from "../components/NoLog";
+import NotLogged from "../components/NotLogged";
 
 const Unauthorized = () => {
+  
   return (
-    <div className='container'>
-            <NotLogged/>
-      <div className="message">
-        <h1>403 - You Shall Not Pass</h1>
-        <p>Uh oh, Gandalf is blocking the way!<br />Maybe you have a typo in the url? Or you meant to go to a different location? Like...Hobbiton?</p>
-      </div>
+    <div>
+      <h2>403 - You should not be here</h2>
+        <NotLogged></NotLogged>
     </div>
-  )
+  );
 }
 
 export default Unauthorized;
