@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const videos = require('./videos');
-const transcripts = require('./transcript');
+const transcripts = require('./transcripts');
 
 //   API => (HOST:PORT)
 

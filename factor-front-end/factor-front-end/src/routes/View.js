@@ -2,7 +2,7 @@ import React from "react";
 import Videos from "../components/Videos";
 import NotLogged from "../components/NoLog";
 
-function Upload() {
+function View() {
 
   const auth = window.localStorage.getItem('auth');
   const owner = window.localStorage.getItem('owner');
@@ -19,4 +19,4 @@ function Upload() {
     return <NotLogged/>
 }
 
-export default Upload;
+export default View;

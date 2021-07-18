@@ -9,10 +9,10 @@ function App() {
 
   return (
       <div className="App">
+        <Router>
         <div className="App-header">
           <Header/>
         </div>
-        <Router>
         <div className="App-body">
           <Routes/>
         </div>

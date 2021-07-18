@@ -13,6 +13,7 @@ services:
     container_name: factor-back-end
     volumes:
       - "../factor-back-end/factor-back-end/assets:/factor/assets"
+      - "./credentials/:/factor/credentials"
     ports:
       - "5000:5000" #specify port forwarding
     networks:

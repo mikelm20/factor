@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-transcribe": "^3.20.0",
+    "@google-cloud/speech": "^4.5.4",
     "aws-sdk": "^2.939.0",
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
@@ -19,6 +20,8 @@
     "ffmpeg-extract-audio": "^1.0.2",
     "fluent-ffmpeg": "^2.1.2",
     "formidable": "^1.2.2",
+    "ibm-watson": "^6.1.1",
+    "microsoft-cognitiveservices-speech-sdk": "^1.18.0",
     "mongoose": "^5.12.14",
     "nodemon": "^2.0.7",
     "sox": "^0.1.0"

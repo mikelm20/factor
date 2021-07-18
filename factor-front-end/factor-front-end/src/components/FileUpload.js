@@ -42,12 +42,11 @@ const FileUpload = () => {
   return (
     <div className="App-fileUpload">
         <div>
+            <label for="fname">Video name: </label>
+            <input id= "fname"type="text" value={title} onChange={onTextChange}/>
           <div>
-            <input type="text" value={title} onChange={onTextChange}/>
             <input type="file" onChange={onFileChange} /> 
-            <button onClick={onFileUpload}> 
-              Upload! 
-            </button> 
+            <button onClick={onFileUpload}> Upload </button> 
             </div> 
         </div>
     </div>

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import LogOut from "./Logout";
 
 const AuthFooter = () =>{
@@ -8,9 +7,7 @@ const AuthFooter = () =>{
     
     return(
         <div id="wrapper">
-            <div id="home-button">
-                <p><Link to='/home'>Go Home</Link></p>
-            </div>
+
             <div id="user">           
                 <p>{user} ({email})</p>
             </div>

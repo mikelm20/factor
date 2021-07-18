@@ -18,14 +18,9 @@ function Videos() {
   return (
     <div className="videoList">
             {list.map((item) => 
-                <div key={item.id} id="videoWrapper">
+                <div key={item.fileName} id="videoWrapper">
                     <h3>{item.title}</h3>
-                    <p><Link to='/watch'>{item.fileName}</Link></p>
-                    <button >AWS</button>
-                    <button >IBM</button>
-                    <button >Google</button>
-                    <button >DS</button>
-                    <button >Delete</button>
+                    <p><Link to={'/watch/'+item.fileName}>{item.fileName}</Link></p>
                 </div>
             )}
     </div>
