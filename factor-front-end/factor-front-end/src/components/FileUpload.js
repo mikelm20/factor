@@ -48,7 +48,7 @@ const FileUpload = () => {
       <div className="upload-button" onClick={onFileUpload}> Upload</div> 
         
       <div id="App-fileSelector">
-        <input type="file" onChange={onFileChange} accept=".mp4"/> 
+        <input type="file" class="custom-file-input" onChange={onFileChange} accept=".mp4"/> 
       </div> 
     </div>
   );

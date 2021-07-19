@@ -20,7 +20,6 @@ function LoginGoogle(props) {
   const onFailure = (res) => {
     props.login(false);
     console.log('Login failed: res:', res);
-    history.push('/unauthorized');
   };
 
   return (

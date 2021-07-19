@@ -6,10 +6,11 @@ import NotLogged from "../components/NotLogged";
   const Watch = (props) => {
 
     const { id } = useParams();
+    const backend = process.env.REACT_APP_BACKEND;
 
     const aws = () => {
       if(window.confirm("This may incur in a monetary cost, are you sure?")){
-        const apiUrl = `http://127.0.0.1:5000/transcripts/transcribe/aws/${id}`;
+        const apiUrl = `${backend}/transcripts/transcribe/aws/${id}`;
         fetch(apiUrl)
         .then((res) => res.json())
         .then((response) => {
@@ -20,7 +21,7 @@ import NotLogged from "../components/NotLogged";
 
     const ibm = () => {
       if(window.confirm("This may incur in a monetary cost, are you sure?")){
-        const apiUrl = `http://127.0.0.1:5000/transcripts/transcribe/ibm/${id}`;
+        const apiUrl = `${backend}/transcripts/transcribe/ibm/${id}`;
         fetch(apiUrl)
         .then((res) => res.json())
         .then((response) => {
@@ -31,7 +32,7 @@ import NotLogged from "../components/NotLogged";
 
     const gc = () => {
       if(window.confirm("This may incur in a monetary cost, are you sure?")){
-        const apiUrl = `http://127.0.0.1:5000/transcripts/transcribe/gc/${id}`;
+        const apiUrl = `${backend}/transcripts/transcribe/gc/${id}`;
         fetch(apiUrl)
         .then((res) => res.json())
         .then((response) => {
@@ -42,7 +43,7 @@ import NotLogged from "../components/NotLogged";
 
     const ds = () => {
       if(window.confirm("This may incur in a monetary cost, are you sure?")){
-        const apiUrl = `http://127.0.0.1:5000/transcripts/transcribe/ds/${id}`;
+        const apiUrl = `${backend}/transcripts/transcribe/ds/${id}`;
         fetch(apiUrl)
         .then((res) => res.json())
         .then((response) => {
@@ -53,7 +54,7 @@ import NotLogged from "../components/NotLogged";
 
     const az = () => {
       if(window.confirm("This may incur in a monetary cost, are you sure?")){
-        const apiUrl = `http://127.0.0.1:5000/transcripts/transcribe/az/${id}`;
+        const apiUrl = `${backend}/transcripts/transcribe/az/${id}`;
         fetch(apiUrl)
         .then((res) => res.json())
         .then((response) => {

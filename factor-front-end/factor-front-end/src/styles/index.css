@@ -17,3 +17,19 @@ body {
   height: 100%;
   position: relative;
 }
+
+video {
+  height: 40%;
+  width: 50%;
+}
+
+a {
+  padding: 0.5%;
+  color: #2bffca;
+  text-decoration: none;
+}
+
+h3,
+h2 {
+  color: white;
+}

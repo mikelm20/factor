@@ -7,7 +7,7 @@ function Videos() {
     const [list, setList] = React.useState(initialList);
 
     React.useEffect(() => {
-        const apiUrl = `http://127.0.0.1:5000/videos`;
+        const apiUrl = `${process.env.REACT_APP_BACKEND}/videos`;
         fetch(apiUrl)
         .then((res) => res.json())
         .then((list) => {

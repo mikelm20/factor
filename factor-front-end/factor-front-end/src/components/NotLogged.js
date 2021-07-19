@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 const NotLogged = () => {
   return(
    <div className="NoUser">
-      <p><Link to='/login'>Take me back</Link></p>
+     <h2>Are you lost?</h2>
+      <p><Link to='/login'>Yes, take me back</Link></p>
     </div>
   );
 }

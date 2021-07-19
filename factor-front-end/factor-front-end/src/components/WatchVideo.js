@@ -118,9 +118,9 @@ const api = process.env.REACT_APP_BACKEND;
         <div>
           <div id="video">
             <video className="library" controls preload="auto" muted crossOrigin="anonymous">
-              <source src={"http://localhost:5000/videos/video/"+fileName} type='video/mp4' />
+              <source src={process.env.REACT_APP_BACKEND+"/videos/video/"+fileName} type='video/mp4' />
               {/* <track label="English" default kind="captions" srcLang="en"
-              src={"http://localhost:5000/transcripts/transcript/"+fileName} /> */}
+              src={process.env.REACT_APP_BACKEND+"/transcripts/transcript/"+fileName} /> */}
             </video>
           </div>
 

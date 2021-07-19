@@ -2,20 +2,30 @@ version: "3.9"
 
 # Define the networks
 networks:
+  frontend:
   backend:
   db:
 
 # Define the services/containers to be run
 services:
+  front: # name of the first service
+    env_file: .front.env
+    image: mikelm20/factor-front-end
+    container_name: factor-front-end
+    ports:
+      - "80:80" # specify port forwarding
+    networks:
+      - frontend
+    depends_on:
+      - back
+
   back: #name of the second service
     env_file: .back.env
     image: mikelm20/factor-back-end
     container_name: factor-back-end
     volumes:
-      - "../factor-back-end/factor-back-end/assets:/factor/assets"
+      - "./assets:/factor/assets"
       - "./credentials/:/factor/credentials"
-    ports:
-      - "5000:5000" #specify port forwarding
     networks:
       - backend
     depends_on:
@@ -50,4 +60,4 @@ services:
     networks:
       - db # link this service to the database service
     depends_on:
-      - database
+      - back

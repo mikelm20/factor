@@ -1,9 +1,5 @@
 # dotenv environment variables file
 .*.env
-
-*.wav
-*.mp4
-
 database/
 assets/
 factor-db-init/

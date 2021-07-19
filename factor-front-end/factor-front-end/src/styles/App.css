@@ -1,20 +1,15 @@
 .App {
   text-align: center;
-  min-height: 90vh; /* will cover the 100% of viewport */
+  min-height: 100vh; /* will cover the 100% of viewport */
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 8%; /* height of your footer */
 }
 
 .App-logo {
   height: 10vmin;
   pointer-events: none;
   margin-bottom: 2%;
-}
-
-.App-link {
-  color: #000000;
 }
 
 .App-header {
@@ -31,12 +26,16 @@
   margin-bottom: 9%;
 }
 
+.App-home {
+  margin-top: 10vh;
+}
+
 .App-footer {
   bottom: 0;
-  height: 8%;
+  height: 10vh;
   left: 0;
   width: 100%;
-  background-color: #1eceb6;
+  background-color: turquoise;
   position: absolute;
 }
 
@@ -64,7 +63,7 @@
 }
 
 #button {
-  color: white;
+  color: turquoise;
   padding: 1em 4em;
   border: 0.2em solid rgb(255, 255, 255);
   margin: 0 2em 2em 0;
@@ -76,6 +75,11 @@
   background-color: rgba(0, 0, 0, 0.452);
   font-weight: 1000;
   font-size: 100%;
+}
+
+#button:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .transcriptShow {
@@ -123,18 +127,20 @@
   text-align: justify;
 }
 
-.clearfix {
-  clear: both;
-}
-
 #button-home {
   padding: 1%;
-  border-style: solid;
-  border-color: black;
+  box-shadow: 2px 2px;
+  box-shadow: darkgray;
+  border-radius: 4%;
   background-color: rgb(255, 255, 255);
   height: 2%;
   width: 10%;
-  float: left; /* add this */
+  float: left;
+  cursor: pointer;
+}
+
+#button-home:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .upload-button {
@@ -142,10 +148,15 @@
   border-style: solid;
   border-color: black;
   background-color: rgb(255, 255, 255);
-  width: 40%;
+  width: 30%;
   cursor: pointer;
   box-sizing: border-box;
-  margin-left: 30%;
+  margin-left: 35%;
+  font-weight: bolder;
+}
+
+.upload-button:hover {
+  background-color: turquoise;
 }
 
 #user {
@@ -171,8 +182,8 @@
 #App-fileUpload {
   border-style: solid;
   border-color: turquoise;
-  padding: 10% 2.5% 10% 2.5%;
-  margin: 10% 0 10% 0;
+  padding: 5% 2.5% 5% 2.5%;
+  margin: 5% 0 5% 0;
   background-color: rgba(0, 0, 0, 0.411);
   align-content: center;
 }
@@ -182,39 +193,24 @@ input[type="text"] {
   padding: 4px 4px;
   margin: 8px 0;
   box-sizing: border-box;
-  font-size: 1em;
+  font-size: 0.5em;
   font-weight: bolder;
 }
 
 input[type="file"] {
   width: 50%;
-  padding: 4px 4px;
+  padding: 2%;
   box-sizing: border-box;
   font-size: 1em;
   font-weight: bolder;
   color: white;
-  width: 100%;
   cursor: pointer;
-  margin-left: 30%;
+  margin-top: 25px;
+  border-color: turquoise;
+  border-style: solid;
 }
 
 #App-fileNaming {
   font-size: 2em;
-  color: white;
-}
-
-video {
-  height: 40%;
-  width: 50%;
-}
-
-a {
-  padding: 0.5%;
-  color: #2bffca;
-  text-decoration: none;
-}
-
-h3,
-h2 {
   color: white;
 }
