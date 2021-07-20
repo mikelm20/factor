@@ -1,26 +1,34 @@
-import LogOut from "./Logout";
 import {useHistory } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const AuthFooter = (props) =>{
+const AuthFooter = () =>{
     
-    const user = window.localStorage.getItem("owner");
-    const email = window.localStorage.getItem("email");
+    const { user, isAuthenticated, isLoading } = useAuth0();
     const history = useHistory();
 
     const goHome = ()=>{
         history.push("/home");
     }
-    
-    return(
+
+    if (isLoading) {
+        return (
+            <div>Loading ...</div>
+        );
+    }
+
+    return (
+        isAuthenticated && (
         <div id="wrapper">
             <div id="button-home" onClick={goHome}>Home</div>
             <div id="user">           
-                <p>{user} ({email})</p>
+                <p>{user.name} ({user.email})</p>
             </div>
             <div id="logout">           
-                <LogOut login={props.login}/>
+                <LogoutButton/>
             </div>
         </div>
+        )
     );
 }
 

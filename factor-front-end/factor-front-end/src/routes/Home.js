@@ -1,8 +1,7 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
-import NotLogged from "../components/NotLogged";
 
-function Home(props) {
+function Home() {
 
     const history = useHistory();
 
@@ -14,20 +13,18 @@ function Home(props) {
         history.push("/view");
     }
 
-    if(props.auth){
-        return (
-            <div className="App-home">
-                <h2>Choose an option</h2>
-                <div id="button" onClick={upload}>
-                    Upload a video
-                </div> 
-                <div id="button" onClick={view}>
-                    Watch a video
-                </div>
+    return (
+        <div className="App-home">
+            <h2>Choose an option</h2>
+            <div id="button" onClick={upload}>
+                Upload a video
+            </div> 
+            <div id="button" onClick={view}>
+                Watch a video
             </div>
-        );
-    }
-    else return <NotLogged/>
-  }
+        </div>
+    );
+
+}
 
 export default Home;

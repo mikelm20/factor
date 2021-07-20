@@ -1,12 +1,12 @@
 import React from "react";
-import LoginGoogle from "../components/LoginGoogle"
+import LoginButton from "../components/LoginButton";
 
-function Login(props) {
+function Login() {
 
     return (
         <div className="App-home">
             <h2>Please Log In to continue</h2>
-            <LoginGoogle login={props.login}/>
+            <LoginButton/>
         </div>
     );
   }
