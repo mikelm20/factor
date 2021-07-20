@@ -1,7 +1,6 @@
 import {useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import AuthenticationButton from "./AuthenticationButton";
-import Login from "../routes/Login";
 import React from "react";
 
 const Footer = () =>{
@@ -10,7 +9,7 @@ const Footer = () =>{
     console.log(JSON.stringify(user));
     const history = useHistory();
     const goHome = ()=>{
-        history.push("/home");
+    history.push("/home");
     }
 
     if(isLoading){

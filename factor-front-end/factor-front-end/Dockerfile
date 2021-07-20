@@ -5,6 +5,7 @@ FROM node:16.3 as build-step
 WORKDIR /factor
 
 COPY ./package*.json .
+COPY ./.env .
 
 RUN npm ci --silent
 
