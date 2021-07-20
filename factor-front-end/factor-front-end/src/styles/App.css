@@ -6,22 +6,6 @@
   position: relative;
 }
 
-.App-logo {
-  height: 10vmin;
-  pointer-events: none;
-  margin-bottom: 2%;
-}
-
-.App-header {
-  display: flex;
-  min-height: 8%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 2vmin;
-  color: #ffffff;
-}
-
 .App-body {
   margin-bottom: 9%;
 }
@@ -49,6 +33,13 @@
 
 .App-upload {
   margin: 1%;
+}
+
+#videoLis {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-color: black;
 }
 
 #videoWrapper {
@@ -96,30 +87,35 @@
   background-image: url(../sources/aws.png);
   width: 200px;
   height: 80px;
+  cursor: pointer;
 }
 
 #ibmShow {
   background-image: url(../sources/ibm.png);
   width: 200px;
   height: 80px;
+  cursor: pointer;
 }
 
 #azShow {
   background-image: url(../sources/azure.png);
   width: 200px;
   height: 80px;
+  cursor: pointer;
 }
 
 #gcShow {
   background-image: url(../sources/GoogleCloud.png);
   width: 200px;
   height: 80px;
+  cursor: pointer;
 }
 
 #dsShow {
   background-image: url(../sources/deepspeech.png);
   width: 220px;
   height: 80px;
+  cursor: pointer;
 }
 
 #videoTranscript {
@@ -158,6 +154,20 @@
 }
 
 #button-log:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#login-main {
+  padding: 1%;
+  margin-left: 40%;
+  box-shadow: 2px 2px;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  width: 20%;
+  cursor: pointer;
+}
+
+#login-main:hover {
   background-color: rgba(255, 255, 255, 0.8);
 }
 

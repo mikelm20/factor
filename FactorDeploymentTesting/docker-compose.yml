@@ -23,10 +23,13 @@ services:
     env_file: .back.env
     image: mikelm20/factor-back-end
     container_name: factor-back-end
+    ports:
+      - "5000:5000" # specify port forwarding
     volumes:
       - "./assets:/factor/assets"
       - "./credentials/:/factor/credentials"
     networks:
+      - frontend
       - backend
     depends_on:
       - database

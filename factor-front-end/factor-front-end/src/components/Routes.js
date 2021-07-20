@@ -10,14 +10,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Routes = () => {
 
-  const {isAuthenticated} = useAuth0();
+  const {isLoading, isAuthenticated} = useAuth0();
   
   return (
     <Switch>
-      <Route exact path='/watch/:id' render={()=>isAuthenticated? <Watch/>: <Login/>}/>
-      <Route exact path='/upload' render={()=>isAuthenticated? <Upload/>: <Login/>}/>
-      <Route exact path='/view' render={()=>isAuthenticated? <View/>: <Login/>}/>
-      <Route exact path='/home' render={()=> isAuthenticated? <Home/> : <Login/>}/>
+      <Route exact path='/watch/:id' render={()=>isLoading? <p>Loading...</p> : isAuthenticated? <Watch/>: <Login/>}/>
+      <Route exact path='/upload' render={()=>isLoading? <p>Loading...</p> : isAuthenticated? <Upload/>: <Login/>}/>
+      <Route exact path='/view' render={()=>isLoading? <p>Loading...</p> : isAuthenticated? <View/>: <Login/>}/>
+      <Route exact path='/home' render={()=> isLoading? <p>Loading...</p> : isAuthenticated? <Home/> : <Login/>}/>
       <Route path='/' render={()=><Redirect to="/home" />}/>
     </Switch>
   )

@@ -1,12 +1,10 @@
 import React from "react";
 import axios from "axios";
-import {useAuth0} from "@auth0/auth0-react"
 
 const FileUpload = () => {
 
   const [title, setTitle] = React.useState("");
   const [file, setFile] = React.useState(null);
-  const { user } = useAuth0();
 
   const onFileChange = event => { 
       // Update the state 
@@ -21,8 +19,8 @@ const FileUpload = () => {
       
     // Update the formData object with the File and the API parameters
     formData.append( "file", file);
-    formData.append( "email", user.user.email);
-    formData.append( "owner", user.user.name);
+    formData.append( "email", window.localStorage.getItem("email"));
+    formData.append( "owner", window.localStorage.getItem("user"));
     formData.append( "title", title);
 
     axios.post(`${process.env.REACT_APP_BACKEND}/videos/upload`, formData)

@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
+import Header from "../components/Header";
 
 function Home() {
 
@@ -14,6 +15,8 @@ function Home() {
     }
 
     return (
+        <>
+        <Header></Header>
         <div className="App-home">
             <h2>Choose an option</h2>
             <div id="button" onClick={upload}>
@@ -23,6 +26,7 @@ function Home() {
                 Watch a video
             </div>
         </div>
+        </>
     );
 
 }
