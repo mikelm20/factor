@@ -7,7 +7,7 @@ import { BrowserRouter} from 'react-router-dom';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT;
-const redirectUri = process.env.REACT_APP_AUTH0_REDIRECT;
+const redirectUri = "https://mikelm20-factor.azurewebsites.net/home";
 
 ReactDOM.render(
   <BrowserRouter>

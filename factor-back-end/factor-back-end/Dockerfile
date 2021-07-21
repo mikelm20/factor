@@ -4,7 +4,7 @@ WORKDIR /factor
 
 COPY ./package*.json .
 
-RUN npm install --production
+RUN npm i
 
 RUN apt update && apt install -y python3-pip ffmpeg sox
 

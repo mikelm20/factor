@@ -8,28 +8,27 @@ networks:
 
 # Define the services/containers to be run
 services:
-  front: # name of the first service
-    env_file: .front.env
-    image: mikelm20/factor-front-end
+  front: # name of the service
+    image: mikelm20/factor-front-end # specify image to build container from
     container_name: factor-front-end
+    domainname: mikelm20-factor
     ports:
       - "80:80" # specify port forwarding
     networks:
       - frontend
-    depends_on:
-      - back
+    restart: always
 
-  back: #name of the second service
+  back: # name of the service
     env_file: .back.env
-    image: mikelm20/factor-back-end
+    image: mikelm20/factor-back-end # specify image to build container from
+    domainname: mikelm20-factor
     container_name: factor-back-end
     ports:
       - "5000:5000" # specify port forwarding
     volumes:
-      - "./assets:/factor/assets"
-      - "./credentials/:/factor/credentials"
+      - ./assets:/factor/assets
+      - ./credentials:/factor/credentials
     networks:
-      - frontend
       - backend
     depends_on:
       - database
@@ -42,25 +41,38 @@ services:
       - app.js
     restart: always
 
-  database: # name of the third service
+  database: # name of the service
     env_file: .db.env
-    image: mongo # specify image to build container from
-    container_name: database
+    image: mikelm20/factor-database # specify image to build container from
+    domainname: mikelm20-factor
     volumes:
-      - "./database/:/data/db"
-      - "./factor-db-init/:/docker-entrypoint-initdb.d/"
+      - ./database/:/data/db
+    container_name: database
     networks:
       - backend
       - db
     restart: always
 
-  dbUI:
-    env_file: .db-ui.env
-    image: mongo-express
-    container_name: db-ui
-    ports:
-      - 8082:8081
-    networks:
-      - db # link this service to the database service
-    depends_on:
-      - back
+  # dbUI:
+  #   env_file: .db-ui.env
+  #   image: mikelm20/mongo-express
+  #   container_name: db-ui
+  #   domainname: mikelm20-factor
+  #   ports:
+  #     - 8081:8081
+  #   networks:
+  #     - db # link this service to the database service
+  #   depends_on:
+  #     - back
+
+  # volumes:
+#   factordbinit:
+#     driver: azure_file
+#     driver_opts:
+#       share_name: factordbinit
+#       storage_account_name: mikelm20factor
+#   credentials:
+#     driver: azure_file
+#     driver_opts:
+#       share_name: credentials
+#       storage_account_name: mikelm20factor

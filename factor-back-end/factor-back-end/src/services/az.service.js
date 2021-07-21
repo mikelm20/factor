@@ -80,9 +80,7 @@ const azTranscribe = async (videoFile) =>{
             }
         });
     };
-    
     recognizer.startContinuousRecognitionAsync();
-
 }
 
 module.exports = {

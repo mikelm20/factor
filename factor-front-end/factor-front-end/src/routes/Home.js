@@ -15,7 +15,7 @@ function Home() {
     }
 
     return (
-        <>
+        <div>
         <Header></Header>
         <div className="App-home">
             <h2>Choose an option</h2>
@@ -26,7 +26,7 @@ function Home() {
                 Watch a video
             </div>
         </div>
-        </>
+        </div>
     );
 
 }
