@@ -1,0 +1,18 @@
+version: "3.9"
+
+# Define the networks
+networks:
+  backend:
+
+# Define the services/containers to be run
+services:
+  back: # name of the service
+    env_file: .back.env
+    image: mikelm20/factor-back-end:azure # specify image to build container from
+    domainname: mikelm20-factor-back
+    container_name: factor-back-end
+    ports:
+      - "5000:5000" # specify port forwarding
+    networks:
+      - backend
+    restart: always

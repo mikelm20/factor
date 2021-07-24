@@ -20,3 +20,5 @@ COPY ./wait-for.sh /factor/wait-for.sh
 #VOLUME ./assets /factor/assets
 
 EXPOSE 5000
+
+CMD ["node", "app.js"]

@@ -1,0 +1,39 @@
+version: "3.9"
+
+# Define the networks
+networks:
+  db:
+
+# Define the services/containers to be run
+services:
+  database: # name of the service
+    env_file: .db.env
+    image: mongo # specify image to build container from
+    domainname: mikelm20-factor
+    container_name: database
+    ports:
+      - 27017:27017
+    volumes:
+      - factordbinit:/docker-entrypoint-initdb.d/
+    networks:
+      - db
+    restart: always
+
+  dbUI:
+    env_file: .db-ui.env
+    image: mikelm20/mongo-express
+    container_name: db-ui
+    domainname: mikelm20-factor
+    ports:
+      - 8081:8081
+    networks:
+      - db # link this service to the database service
+    depends_on:
+      - database
+
+volumes:
+  factordbinit:
+    driver: azure_file
+    driver_opts:
+      share_name: factordbinit
+      storage_account_name: mikelm20factor
